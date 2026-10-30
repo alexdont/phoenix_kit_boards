@@ -91,6 +91,17 @@ moduledoc; the ones you will reach for:
 Boards opened from the widget open at `/dashboard/boards/:id` (so people who are not
 admins can open them) and link back to `return_to`.
 
+### Languages
+
+The widget, the boards list, the board page and the sidebar tab are translated into
+**Russian** and **Estonian** (English is the source), through the module's own
+Gettext backend, `PhoenixKitBoards.Gettext`. The language is whatever core has put on
+the request, so a widget on your page follows your site's language. To add a language:
+`mix gettext.merge priv/gettext --locale <code>`, translate
+`priv/gettext/<code>/LC_MESSAGES/default.po`, and the completeness test holds it to the
+same standard. Not covered: the editor's own toolbar tooltips, which belong to Etcher
+and Fresco.
+
 ### Who may see a place
 
 The module cannot know what "can see project X" means in your app, so it asks:

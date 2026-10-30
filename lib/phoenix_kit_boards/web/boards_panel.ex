@@ -83,6 +83,7 @@ defmodule PhoenixKitBoards.Web.BoardsPanel do
   with no catch-all would crash on a message it did not expect.
   """
   use PhoenixKitWeb, :live_component
+  use Gettext, backend: PhoenixKitBoards.Gettext
 
   require Logger
 
@@ -274,7 +275,7 @@ defmodule PhoenixKitBoards.Web.BoardsPanel do
                create_opts(socket)
              ) do
           {:ok, board} -> {:noreply, after_create(socket, board)}
-          {:error, _reason} -> {:noreply, fail(socket, "Could not create the board.")}
+          {:error, _reason} -> {:noreply, fail(socket, gettext("Could not create the board."))}
         end
 
       {:error, message} ->
@@ -306,10 +307,10 @@ defmodule PhoenixKitBoards.Web.BoardsPanel do
              |> load()}
 
           {:error, :empty} ->
-            {:noreply, fail(socket, "Write something first.")}
+            {:noreply, fail(socket, gettext("Write something first."))}
 
           {:error, _reason} ->
-            {:noreply, fail(socket, "Could not save the note.")}
+            {:noreply, fail(socket, gettext("Could not save the note."))}
         end
 
       {:error, message} ->
@@ -355,7 +356,7 @@ defmodule PhoenixKitBoards.Web.BoardsPanel do
       {:noreply, socket |> assign(:renaming, nil) |> load()}
     else
       "" -> {:noreply, assign(socket, :renaming, nil)}
-      {:error, %Ecto.Changeset{}} -> {:noreply, fail(socket, "That name will not do.")}
+      {:error, %Ecto.Changeset{}} -> {:noreply, fail(socket, gettext("That name will not do."))}
       error -> {:noreply, refuse(socket, error)}
     end
   end
@@ -370,7 +371,7 @@ defmodule PhoenixKitBoards.Web.BoardsPanel do
     if to in socket.assigns.visibility_options do
       act(socket, id, &Boards.set_visibility(&1, to, socket.assigns.user_uuid))
     else
-      {:noreply, fail(socket, "That is not available here.")}
+      {:noreply, fail(socket, gettext("That is not available here."))}
     end
   end
 
@@ -383,8 +384,11 @@ defmodule PhoenixKitBoards.Web.BoardsPanel do
          {:ok, _} <- Boards.delete_board(board) do
       {:noreply, load(socket)}
     else
-      {:error, %Ecto.Changeset{}} -> {:noreply, fail(socket, "Could not delete the board.")}
-      error -> {:noreply, refuse(socket, error)}
+      {:error, %Ecto.Changeset{}} ->
+        {:noreply, fail(socket, gettext("Could not delete the board."))}
+
+      error ->
+        {:noreply, refuse(socket, error)}
     end
   end
 
@@ -414,7 +418,7 @@ defmodule PhoenixKitBoards.Web.BoardsPanel do
           {:error, reason} ->
             # Storage's own reasons are for the log, not for the person.
             Logger.warning("[boards] quick image failed: #{inspect(reason)}")
-            {:noreply, fail(socket, "Could not save the image.")}
+            {:noreply, fail(socket, gettext("Could not save the image."))}
         end
 
       {:error, message} ->
@@ -430,7 +434,7 @@ defmodule PhoenixKitBoards.Web.BoardsPanel do
   defp allow_create(%{assigns: %{can_create?: true, user_uuid: uuid}}) when is_binary(uuid),
     do: :ok
 
-  defp allow_create(_socket), do: {:error, "You cannot add boards here."}
+  defp allow_create(_socket), do: {:error, gettext("You cannot add boards here.")}
 
   # The creator, or an admin. Sharing and archiving are narrower (the creator
   # only) and enforced by the context, which does not know about admins.
@@ -462,15 +466,16 @@ defmodule PhoenixKitBoards.Web.BoardsPanel do
          {:ok, _} <- fun.(board) do
       {:noreply, load(socket)}
     else
-      {:error, %Ecto.Changeset{}} -> {:noreply, fail(socket, "That did not work.")}
+      {:error, %Ecto.Changeset{}} -> {:noreply, fail(socket, gettext("That did not work."))}
       error -> {:noreply, refuse(socket, error)}
     end
   end
 
   defp refuse(socket, {:error, :forbidden}),
-    do: socket |> fail("Only the board's creator can do that.") |> load()
+    do: socket |> fail(gettext("Only the board's creator can do that.")) |> load()
 
-  defp refuse(socket, _gone), do: socket |> fail("That board is no longer available.") |> load()
+  defp refuse(socket, _gone),
+    do: socket |> fail(gettext("That board is no longer available.")) |> load()
 
   defp fail(socket, message), do: assign(socket, :error, message)
 
@@ -502,7 +507,7 @@ defmodule PhoenixKitBoards.Web.BoardsPanel do
         @class
       ]}
     >
-      Sign in to see boards here.
+      {gettext("Sign in to see boards here.")}
     </div>
     """
   end
@@ -529,7 +534,7 @@ defmodule PhoenixKitBoards.Web.BoardsPanel do
           phx-target={@myself}
           class="btn btn-ghost btn-xs"
         >
-          Dismiss
+          {gettext("Dismiss")}
         </button>
       </div>
 
@@ -542,7 +547,7 @@ defmodule PhoenixKitBoards.Web.BoardsPanel do
         :if={@boards == [] and not @can_create?}
         class="rounded-lg border border-dashed border-base-300 p-6 text-center text-sm text-base-content/60"
       >
-        No boards here yet.
+        {gettext("No boards here yet.")}
       </p>
 
       <ul
@@ -562,7 +567,7 @@ defmodule PhoenixKitBoards.Web.BoardsPanel do
         phx-target={@myself}
         class="btn btn-ghost btn-xs"
       >
-        Show all {@total}
+        {gettext("Show all %{count}", count: @total)}
       </button>
     </section>
     """
@@ -582,7 +587,7 @@ defmodule PhoenixKitBoards.Web.BoardsPanel do
       <textarea
         name="note"
         maxlength="2000"
-        placeholder="Jot a note…"
+        placeholder={gettext("Jot a note…")}
         autofocus
         class="textarea textarea-ghost min-h-0 w-full flex-1 resize-none p-1 text-sm leading-snug focus:border-transparent focus:outline-none"
       >{@note}</textarea>
@@ -593,9 +598,9 @@ defmodule PhoenixKitBoards.Web.BoardsPanel do
           phx-target={@myself}
           class="btn btn-ghost btn-xs"
         >
-          Cancel
+          {gettext("Cancel")}
         </button>
-        <button type="submit" class="btn btn-primary btn-xs">Save</button>
+        <button type="submit" class="btn btn-primary btn-xs">{gettext("Save")}</button>
       </div>
     </form>
     """
@@ -613,7 +618,7 @@ defmodule PhoenixKitBoards.Web.BoardsPanel do
         type="button"
         phx-click="create_empty"
         phx-target={@myself}
-        aria-label="New empty board"
+        aria-label={gettext("New empty board")}
         class={[
           "btn btn-circle btn-primary shadow-sm",
           if(@big, do: "h-20 w-20", else: "h-12 w-12")
@@ -631,12 +636,12 @@ defmodule PhoenixKitBoards.Web.BoardsPanel do
           type="button"
           phx-click="text_open"
           phx-target={@myself}
-          title="Start with a note"
-          aria-label="Start with a note"
+          title={gettext("Start with a note")}
+          aria-label={gettext("Start with a note")}
           class={["btn btn-sm btn-outline", if(@big, do: "gap-1", else: "btn-circle")]}
         >
           <.icon name="hero-pencil-square" class="h-4 w-4" />
-          <span :if={@big}>Text</span>
+          <span :if={@big}>{gettext("Text")}</span>
         </button>
 
         <form
@@ -646,15 +651,15 @@ defmodule PhoenixKitBoards.Web.BoardsPanel do
           phx-target={@myself}
         >
           <label
-            title="Start with an image"
-            aria-label="Start with an image"
+            title={gettext("Start with an image")}
+            aria-label={gettext("Start with an image")}
             class={[
               "btn btn-sm btn-outline cursor-pointer",
               if(@big, do: "gap-1", else: "btn-circle")
             ]}
           >
             <.icon name="hero-camera" class="h-4 w-4" />
-            <span :if={@big}>Image</span>
+            <span :if={@big}>{gettext("Image")}</span>
             <.live_file_input upload={@uploads.quick_image} class="hidden" />
           </label>
         </form>
@@ -668,7 +673,7 @@ defmodule PhoenixKitBoards.Web.BoardsPanel do
       >
         <select
           name="visibility"
-          aria-label="Who can see the board"
+          aria-label={gettext("Who can see the board")}
           class="select select-ghost select-xs h-6 min-h-0 text-xs text-base-content/60"
         >
           <option :for={o <- @visibility_options} value={o} selected={o == @visibility}>
@@ -685,7 +690,7 @@ defmodule PhoenixKitBoards.Web.BoardsPanel do
           phx-value-ref={entry.ref}
           phx-target={@myself}
           class="btn btn-ghost btn-xs btn-circle"
-          aria-label="Cancel upload"
+          aria-label={gettext("Cancel upload")}
         >
           <.icon name="hero-x-mark" class="h-3.5 w-3.5" />
         </button>
@@ -768,7 +773,7 @@ defmodule PhoenixKitBoards.Web.BoardsPanel do
         phx-target={@myself}
         class="input input-bordered input-xs min-w-0 flex-1"
       />
-      <button type="submit" class="btn btn-primary btn-xs px-2" aria-label="Save name">
+      <button type="submit" class="btn btn-primary btn-xs px-2" aria-label={gettext("Save name")}>
         <.icon name="hero-check" class="h-3.5 w-3.5" />
       </button>
     </form>
@@ -806,7 +811,7 @@ defmodule PhoenixKitBoards.Web.BoardsPanel do
         type="button"
         tabindex="0"
         class="btn btn-circle btn-xs border-0 bg-base-100/80 opacity-70 shadow-sm backdrop-blur group-hover:opacity-100 focus:opacity-100"
-        aria-label={"Actions for #{@board.name}"}
+        aria-label={gettext("Actions for %{name}", name: @board.name)}
       >
         <.icon name="hero-ellipsis-horizontal" class="h-4 w-4" />
       </button>
@@ -821,7 +826,7 @@ defmodule PhoenixKitBoards.Web.BoardsPanel do
             phx-value-id={@board.uuid}
             phx-target={@myself}
           >
-            <.icon name="hero-pencil" class="h-4 w-4" /> Rename
+            <.icon name="hero-pencil" class="h-4 w-4" /> {gettext("Rename")}
           </button>
         </li>
         <li>
@@ -832,7 +837,7 @@ defmodule PhoenixKitBoards.Web.BoardsPanel do
             phx-value-id={@board.uuid}
             phx-target={@myself}
           >
-            <.icon name="hero-bookmark" class="h-4 w-4" /> Pin to front
+            <.icon name="hero-bookmark" class="h-4 w-4" /> {gettext("Pin to front")}
           </button>
           <button
             :if={@board.pinned_at}
@@ -841,7 +846,7 @@ defmodule PhoenixKitBoards.Web.BoardsPanel do
             phx-value-id={@board.uuid}
             phx-target={@myself}
           >
-            <.icon name="hero-bookmark-slash" class="h-4 w-4" /> Unpin
+            <.icon name="hero-bookmark-slash" class="h-4 w-4" /> {gettext("Unpin")}
           </button>
         </li>
         <li :if={@creator? and length(@visibility_options) == 2 and @board.visibility == "shared"}>
@@ -852,7 +857,7 @@ defmodule PhoenixKitBoards.Web.BoardsPanel do
             phx-value-to="private"
             phx-target={@myself}
           >
-            <.icon name="hero-lock-closed" class="h-4 w-4" /> Make private
+            <.icon name="hero-lock-closed" class="h-4 w-4" /> {gettext("Make private")}
           </button>
         </li>
         <li :if={@creator? and length(@visibility_options) == 2 and @board.visibility == "private"}>
@@ -863,12 +868,12 @@ defmodule PhoenixKitBoards.Web.BoardsPanel do
             phx-value-to="shared"
             phx-target={@myself}
           >
-            <.icon name="hero-user-group" class="h-4 w-4" /> Share with everyone here
+            <.icon name="hero-user-group" class="h-4 w-4" /> {gettext("Share with everyone here")}
           </button>
         </li>
         <li :if={@creator?}>
           <button type="button" phx-click="archive" phx-value-id={@board.uuid} phx-target={@myself}>
-            <.icon name="hero-archive-box" class="h-4 w-4" /> Archive
+            <.icon name="hero-archive-box" class="h-4 w-4" /> {gettext("Archive")}
           </button>
         </li>
         <li :if={@manage?}>
@@ -877,10 +882,10 @@ defmodule PhoenixKitBoards.Web.BoardsPanel do
             phx-click="delete"
             phx-value-id={@board.uuid}
             phx-target={@myself}
-            data-confirm="Delete this board? Its files move to the media trash."
+            data-confirm={gettext("Delete this board? Its files move to the media trash.")}
             class="text-error"
           >
-            <.icon name="hero-trash" class="h-4 w-4" /> Delete
+            <.icon name="hero-trash" class="h-4 w-4" /> {gettext("Delete")}
           </button>
         </li>
       </ul>
@@ -891,11 +896,11 @@ defmodule PhoenixKitBoards.Web.BoardsPanel do
   defp blank_preview?(nil), do: true
   defp blank_preview?(preview), do: !preview["image_url"] and !preview["text"]
 
-  defp visibility_label("private"), do: "Only me"
-  defp visibility_label("shared"), do: "Everyone here"
+  defp visibility_label("private"), do: gettext("Only me")
+  defp visibility_label("shared"), do: gettext("Everyone here")
 
-  defp upload_error_text(:too_large), do: "That file is too large."
-  defp upload_error_text(:not_accepted), do: "Only images can be added here."
-  defp upload_error_text(:too_many_files), do: "One image at a time."
-  defp upload_error_text(_), do: "That upload failed."
+  defp upload_error_text(:too_large), do: gettext("That file is too large.")
+  defp upload_error_text(:not_accepted), do: gettext("Only images can be added here.")
+  defp upload_error_text(:too_many_files), do: gettext("One image at a time.")
+  defp upload_error_text(_), do: gettext("That upload failed.")
 end

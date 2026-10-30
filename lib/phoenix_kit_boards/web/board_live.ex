@@ -15,6 +15,7 @@ defmodule PhoenixKitBoards.Web.BoardLive do
       maps them through their own pan/zoom (`BoardCursors`).
   """
   use PhoenixKitWeb, :live_view
+  use Gettext, backend: PhoenixKitBoards.Gettext
 
   require Logger
 
@@ -145,7 +146,7 @@ defmodule PhoenixKitBoards.Web.BoardLive do
   # One answer for "there is no such board" and "you may not see it": telling
   # them apart would confirm that someone's private board exists.
   defp not_found(socket) do
-    socket = put_flash(socket, :error, "Board not found.")
+    socket = put_flash(socket, :error, gettext("Board not found."))
 
     # The user route sends people back to a host page, which is in another
     # live_session; `push_navigate` would be refused and logged.
@@ -688,7 +689,7 @@ defmodule PhoenixKitBoards.Web.BoardLive do
            |> tell_sender_about_restored(restored, annotations)}
 
         {:error, _reason} ->
-          {:noreply, put_flash(socket, :error, "Could not save the board.")}
+          {:noreply, put_flash(socket, :error, gettext("Could not save the board."))}
       end
     end
   end
@@ -1147,7 +1148,7 @@ defmodule PhoenixKitBoards.Web.BoardLive do
           :if={@live_action == :user}
           href={@back_to}
           class="btn btn-ghost btn-sm btn-circle"
-          aria-label="Back to boards"
+          aria-label={gettext("Back to boards")}
         >
           <.icon name="hero-arrow-left" class="w-5 h-5" />
         </a>
@@ -1155,7 +1156,7 @@ defmodule PhoenixKitBoards.Web.BoardLive do
           :if={@live_action != :user}
           navigate={@back_to}
           class="btn btn-ghost btn-sm btn-circle"
-          aria-label="Back to boards"
+          aria-label={gettext("Back to boards")}
         >
           <.icon name="hero-arrow-left" class="w-5 h-5" />
         </.link>
@@ -1165,7 +1166,7 @@ defmodule PhoenixKitBoards.Web.BoardLive do
             <span
               class="inline-flex h-7 w-7 items-center justify-center rounded-full text-xs font-medium text-white ring-2 ring-base-100"
               style={"background:#{@me.color}"}
-              title={"#{@me.name} (you)"}
+              title={gettext("%{name} (you)", name: @me.name)}
             >
               {initials(@me.name)}
             </span>
@@ -1179,7 +1180,7 @@ defmodule PhoenixKitBoards.Web.BoardLive do
             </span>
           </div>
           <span class="text-xs text-base-content/50">
-            {map_size(@peers) + 1} online
+            {gettext("%{count} online", count: map_size(@peers) + 1)}
           </span>
         </div>
       </header>

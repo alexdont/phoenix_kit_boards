@@ -30,12 +30,21 @@ defmodule PhoenixKitBoards.Integration.BoardsPanelTest do
   end
 
   defp mount_panel(conn, user, opts \\ []) do
+    {locale, opts} = Keyword.pop(opts, :locale)
     opts = Keyword.merge([scope: @scope, label: "Panel Co", poll: 0], opts)
-    live_isolated(conn, HostLive, session: %{"user_uuid" => user && user.uuid, "opts" => opts})
+
+    live_isolated(conn, HostLive,
+      session: %{"user_uuid" => user && user.uuid, "opts" => opts, "locale" => locale}
+    )
   end
 
   # An event as the browser could send it, to the panel (not the host page).
   defp fire(lv, event, params), do: lv |> with_target("#panel") |> render_click(event, params)
+
+  defmodule NoCreate do
+    def can?(:view, _user, _scope), do: true
+    def can?(:create, _user, _scope), do: false
+  end
 
   defmodule Spy do
     def can?(action, _user, scope) do
@@ -138,6 +147,84 @@ defmodule PhoenixKitBoards.Integration.BoardsPanelTest do
 
       html = lv |> element("button", "Show all 5") |> render_click()
       assert length(rows(html)) == 5
+    end
+  end
+
+  describe "in the language of the request" do
+    test "English is the source and needs no catalog", %{conn: conn, me: me} do
+      {:ok, _lv, html} = mount_panel(conn, me, locale: "en")
+      assert html =~ "New empty board"
+      assert html =~ "Start with a note"
+    end
+
+    test "Russian", %{conn: conn, me: me} do
+      {:ok, lv, html} = mount_panel(conn, me, locale: "ru")
+
+      assert html =~ "Новая пустая доска"
+      assert html =~ "Начать с заметки"
+      assert html =~ "Начать с изображения"
+      assert html =~ "Кто может видеть доску"
+      assert html =~ "Только я"
+      assert html =~ "Все с доступом"
+      refute html =~ "New empty board"
+      refute html =~ "Start with"
+
+      lv |> element("button[phx-click=text_open]") |> render_click()
+      html = lv |> form("#panel-note", %{"note" => "   "}) |> render_submit()
+      assert html =~ "Сначала напишите что-нибудь."
+      refute html =~ "Jot a note…"
+      assert html =~ "Запишите заметку…"
+    end
+
+    test "Estonian", %{conn: conn, me: me} do
+      {:ok, lv, html} = mount_panel(conn, me, locale: "et")
+
+      assert html =~ "Uus tühi tahvel"
+      assert html =~ "Alusta märkega"
+      assert html =~ "Kes tahvlit näha saab"
+      assert html =~ "Ainult mina"
+      refute html =~ "New empty board"
+
+      lv |> element("button[phx-click=text_open]") |> render_click()
+      html = lv |> form("#panel-note", %{"note" => "   "}) |> render_submit()
+      assert html =~ "Kirjuta esmalt midagi."
+    end
+
+    test "the tile menu, the count and a refusal are translated too", %{conn: conn, me: me} do
+      for n <- 1..3, do: board!(me, "Board #{n}")
+      {:ok, lv, html} = mount_panel(conn, me, locale: "ru", limit: 2)
+
+      assert html =~ "Переименовать"
+      assert html =~ "Закрепить вверху"
+      assert html =~ "Архивировать"
+      assert html =~ "Удалить"
+      assert html =~ "Показать все (3)"
+      refute html =~ "Rename"
+
+      other = user_fixture()
+      theirs = board!(other, "Not mine")
+      html = fire(lv, "archive", %{"id" => theirs.uuid})
+      assert html =~ "Это может сделать только автор доски."
+    end
+
+    test "a refused place says so in the visitor's language", %{conn: conn, me: me} do
+      Application.put_env(:phoenix_kit_boards, :authorize, {__MODULE__.NoCreate, :can?})
+
+      {:ok, lv, _} = mount_panel(conn, me, locale: "et")
+      html = fire(lv, "create_empty", %{})
+      assert html =~ "Sa ei saa siia tahvleid lisada."
+    end
+
+    test "a quick board is named in the language it was made in, with a numeric date",
+         %{conn: conn, me: me} do
+      {:ok, lv, _} = mount_panel(conn, me, locale: "ru", open: :new_tab)
+      lv |> element("button[phx-click=create_empty]") |> render_click()
+      [board] = Boards.list_for_scope(@scope, me.uuid)
+      assert board.name =~ ~r/^Доска · \d{4}-\d{2}-\d{2} \d{2}:\d{2}$/
+
+      {:ok, lv, _} = mount_panel(conn, me, locale: "et", open: :new_tab)
+      lv |> element("button[phx-click=create_empty]") |> render_click()
+      assert Enum.any?(Boards.list_for_scope(@scope, me.uuid), &(&1.name =~ ~r/^Tahvel · \d{4}-/))
     end
   end
 

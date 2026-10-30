@@ -41,6 +41,8 @@ defmodule PhoenixKitBoards do
 
   use PhoenixKit.Module
 
+  use Gettext, backend: PhoenixKitBoards.Gettext
+
   alias PhoenixKit.Dashboard.Tab
   alias PhoenixKit.Settings
 
@@ -91,7 +93,10 @@ defmodule PhoenixKitBoards do
     [
       %Tab{
         id: :admin_boards,
-        label: "Boards",
+        # `dgettext_noop` marks the msgid for extraction; core translates it through
+        # the tab's `gettext_backend` when it draws the sidebar.
+        label: dgettext_noop("default", "Boards"),
+        gettext_backend: PhoenixKitBoards.Gettext,
         icon: "hero-rectangle-group",
         path: "boards",
         priority: 645,
@@ -118,7 +123,8 @@ defmodule PhoenixKitBoards do
     [
       %Tab{
         id: :user_board,
-        label: "Board",
+        label: dgettext_noop("default", "Board"),
+        gettext_backend: PhoenixKitBoards.Gettext,
         path: "/dashboard/boards/:id",
         level: :user,
         visible: false,

@@ -1,0 +1,306 @@
+## "msgid"s in this file come from POT (.pot) files.
+###
+### Do not add, change, or remove "msgid"s manually here as
+### they're tied to the ones in the corresponding POT file
+### (with the same domain).
+###
+### Use "mix gettext.extract --merge" or "mix gettext.merge"
+### to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100 != 11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10||n%100>=20) ? 1 : 2);\n"
+
+#: lib/phoenix_kit_boards/web/board_live.ex:1183
+#, elixir-autogen, elixir-format
+msgid "%{count} online"
+msgstr "%{count} в сети"
+
+#: lib/phoenix_kit_boards/web/board_live.ex:1169
+#, elixir-autogen, elixir-format
+msgid "%{name} (you)"
+msgstr "%{name} (вы)"
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:810
+#, elixir-autogen, elixir-format
+msgid "Actions for %{name}"
+msgstr "Действия: %{name}"
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:872
+#, elixir-autogen, elixir-format
+msgid "Archive"
+msgstr "Архивировать"
+
+#: lib/phoenix_kit_boards/web/board_live.ex:1151
+#: lib/phoenix_kit_boards/web/board_live.ex:1159
+#, elixir-autogen, elixir-format
+msgid "Back to boards"
+msgstr "Назад к доскам"
+
+#: lib/phoenix_kit_boards.ex:126
+#: lib/phoenix_kit_boards/quick.ex:47
+#, elixir-autogen, elixir-format
+msgid "Board"
+msgstr "Доска"
+
+#: lib/phoenix_kit_boards/web/board_live.ex:149
+#, elixir-autogen, elixir-format
+msgid "Board not found."
+msgstr "Доска не найдена."
+
+#: lib/phoenix_kit_boards.ex:98
+#: lib/phoenix_kit_boards/web/index_live.ex:15
+#, elixir-autogen, elixir-format
+msgid "Boards"
+msgstr "Доски"
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:597
+#, elixir-autogen, elixir-format
+msgid "Cancel"
+msgstr "Отмена"
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:689
+#, elixir-autogen, elixir-format
+msgid "Cancel upload"
+msgstr "Отменить загрузку"
+
+#: lib/phoenix_kit_boards/web/index_live.ex:64
+#, elixir-autogen, elixir-format
+msgid "Collaborative infinite canvases — open one in two tabs to see live sync."
+msgstr "Совместные бесконечные холсты — откройте один в двух вкладках, чтобы увидеть синхронизацию в реальном времени."
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:278
+#: lib/phoenix_kit_boards/web/index_live.ex:28
+#, elixir-autogen, elixir-format
+msgid "Could not create the board."
+msgstr "Не удалось создать доску."
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:387
+#: lib/phoenix_kit_boards/web/index_live.ex:44
+#, elixir-autogen, elixir-format
+msgid "Could not delete the board."
+msgstr "Не удалось удалить доску."
+
+#: lib/phoenix_kit_boards/web/board_live.ex:692
+#, elixir-autogen, elixir-format
+msgid "Could not save the board."
+msgstr "Не удалось сохранить доску."
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:418
+#, elixir-autogen, elixir-format
+msgid "Could not save the image."
+msgstr "Не удалось сохранить изображение."
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:313
+#, elixir-autogen, elixir-format
+msgid "Could not save the note."
+msgstr "Не удалось сохранить заметку."
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:884
+#, elixir-autogen, elixir-format
+msgid "Delete"
+msgstr "Удалить"
+
+#: lib/phoenix_kit_boards/web/index_live.ex:92
+#, elixir-autogen, elixir-format
+msgid "Delete board"
+msgstr "Удалить доску"
+
+#: lib/phoenix_kit_boards/web/index_live.ex:90
+#, elixir-autogen, elixir-format
+msgid "Delete this board?"
+msgstr "Удалить эту доску?"
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:881
+#, elixir-autogen, elixir-format
+msgid "Delete this board? Its files move to the media trash."
+msgstr "Удалить эту доску? Её файлы будут перемещены в корзину медиа."
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:533
+#, elixir-autogen, elixir-format
+msgid "Dismiss"
+msgstr "Закрыть"
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:896
+#, elixir-autogen, elixir-format
+msgid "Everyone here"
+msgstr "Все с доступом"
+
+#: lib/phoenix_kit_boards/quick.ex:250
+#: lib/phoenix_kit_boards/quick.ex:255
+#: lib/phoenix_kit_boards/web/boards_panel.ex:658
+#, elixir-autogen, elixir-format
+msgid "Image"
+msgstr "Изображение"
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:586
+#, elixir-autogen, elixir-format
+msgid "Jot a note…"
+msgstr "Запишите заметку…"
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:856
+#, elixir-autogen, elixir-format
+msgid "Make private"
+msgstr "Сделать приватной"
+
+#: lib/phoenix_kit_boards/web/index_live.ex:67
+#, elixir-autogen, elixir-format
+msgid "New board"
+msgstr "Новая доска"
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:617
+#, elixir-autogen, elixir-format
+msgid "New empty board"
+msgstr "Новая пустая доска"
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:546
+#, elixir-autogen, elixir-format
+msgid "No boards here yet."
+msgstr "Здесь пока нет досок."
+
+#: lib/phoenix_kit_boards/web/index_live.ex:76
+#, elixir-autogen, elixir-format
+msgid "No boards yet. Create your first one."
+msgstr "Досок пока нет. Создайте первую."
+
+#: lib/phoenix_kit_boards/quick.ex:243
+#, elixir-autogen, elixir-format
+msgid "Note"
+msgstr "Заметка"
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:900
+#, elixir-autogen, elixir-format
+msgid "One image at a time."
+msgstr "Только одно изображение за раз."
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:899
+#, elixir-autogen, elixir-format
+msgid "Only images can be added here."
+msgstr "Здесь можно добавлять только изображения."
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:895
+#, elixir-autogen, elixir-format
+msgid "Only me"
+msgstr "Только я"
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:472
+#, elixir-autogen, elixir-format
+msgid "Only the board's creator can do that."
+msgstr "Это может сделать только автор доски."
+
+#: lib/phoenix_kit_boards/web/index_live.ex:101
+#, elixir-autogen, elixir-format
+msgid "Open"
+msgstr "Открыть"
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:836
+#, elixir-autogen, elixir-format
+msgid "Pin to front"
+msgstr "Закрепить вверху"
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:825
+#, elixir-autogen, elixir-format
+msgid "Rename"
+msgstr "Переименовать"
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:599
+#, elixir-autogen, elixir-format
+msgid "Save"
+msgstr "Сохранить"
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:772
+#, elixir-autogen, elixir-format
+msgid "Save name"
+msgstr "Сохранить название"
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:867
+#, elixir-autogen, elixir-format
+msgid "Share with everyone here"
+msgstr "Открыть всем с доступом"
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:566
+#, elixir-autogen, elixir-format
+msgid "Show all %{count}"
+msgstr "Показать все (%{count})"
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:506
+#, elixir-autogen, elixir-format
+msgid "Sign in to see boards here."
+msgstr "Войдите, чтобы увидеть здесь доски."
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:635
+#: lib/phoenix_kit_boards/web/boards_panel.ex:636
+#, elixir-autogen, elixir-format
+msgid "Start with a note"
+msgstr "Начать с заметки"
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:650
+#: lib/phoenix_kit_boards/web/boards_panel.ex:651
+#, elixir-autogen, elixir-format
+msgid "Start with an image"
+msgstr "Начать с изображения"
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:640
+#, elixir-autogen, elixir-format
+msgid "Text"
+msgstr "Текст"
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:474
+#, elixir-autogen, elixir-format
+msgid "That board is no longer available."
+msgstr "Эта доска больше недоступна."
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:466
+#, elixir-autogen, elixir-format
+msgid "That did not work."
+msgstr "Не получилось."
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:898
+#, elixir-autogen, elixir-format
+msgid "That file is too large."
+msgstr "Файл слишком большой."
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:374
+#, elixir-autogen, elixir-format
+msgid "That is not available here."
+msgstr "Здесь это недоступно."
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:359
+#, elixir-autogen, elixir-format
+msgid "That name will not do."
+msgstr "Это название не подходит."
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:901
+#, elixir-autogen, elixir-format
+msgid "That upload failed."
+msgstr "Не удалось загрузить файл."
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:845
+#, elixir-autogen, elixir-format
+msgid "Unpin"
+msgstr "Открепить"
+
+#: lib/phoenix_kit_boards/web/index_live.ex:22
+#, elixir-autogen, elixir-format
+msgid "Untitled board"
+msgstr "Доска без названия"
+
+#: lib/phoenix_kit_boards/web/index_live.ex:98
+#, elixir-autogen, elixir-format
+msgid "Updated %{time}"
+msgstr "Обновлено: %{time}"
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:672
+#, elixir-autogen, elixir-format
+msgid "Who can see the board"
+msgstr "Кто может видеть доску"
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:310
+#, elixir-autogen, elixir-format
+msgid "Write something first."
+msgstr "Сначала напишите что-нибудь."
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:434
+#, elixir-autogen, elixir-format
+msgid "You cannot add boards here."
+msgstr "Вы не можете добавлять здесь доски."

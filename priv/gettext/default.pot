@@ -1,0 +1,306 @@
+## This file is a PO Template file.
+##
+## "msgid"s here are often extracted from source code.
+## Add new messages manually only if they're dynamic
+## messages that can't be statically extracted.
+##
+## Run "mix gettext.extract" to bring this file up to
+## date. Leave "msgstr"s empty as changing them here has no
+## effect: edit them in PO (.po) files instead.
+#
+msgid ""
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/board_live.ex:1183
+#, elixir-autogen, elixir-format
+msgid "%{count} online"
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/board_live.ex:1169
+#, elixir-autogen, elixir-format
+msgid "%{name} (you)"
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:810
+#, elixir-autogen, elixir-format
+msgid "Actions for %{name}"
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:872
+#, elixir-autogen, elixir-format
+msgid "Archive"
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/board_live.ex:1151
+#: lib/phoenix_kit_boards/web/board_live.ex:1159
+#, elixir-autogen, elixir-format
+msgid "Back to boards"
+msgstr ""
+
+#: lib/phoenix_kit_boards.ex:126
+#: lib/phoenix_kit_boards/quick.ex:47
+#, elixir-autogen, elixir-format
+msgid "Board"
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/board_live.ex:149
+#, elixir-autogen, elixir-format
+msgid "Board not found."
+msgstr ""
+
+#: lib/phoenix_kit_boards.ex:98
+#: lib/phoenix_kit_boards/web/index_live.ex:15
+#, elixir-autogen, elixir-format
+msgid "Boards"
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:597
+#, elixir-autogen, elixir-format
+msgid "Cancel"
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:689
+#, elixir-autogen, elixir-format
+msgid "Cancel upload"
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/index_live.ex:64
+#, elixir-autogen, elixir-format
+msgid "Collaborative infinite canvases — open one in two tabs to see live sync."
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:278
+#: lib/phoenix_kit_boards/web/index_live.ex:28
+#, elixir-autogen, elixir-format
+msgid "Could not create the board."
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:387
+#: lib/phoenix_kit_boards/web/index_live.ex:44
+#, elixir-autogen, elixir-format
+msgid "Could not delete the board."
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/board_live.ex:692
+#, elixir-autogen, elixir-format
+msgid "Could not save the board."
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:418
+#, elixir-autogen, elixir-format
+msgid "Could not save the image."
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:313
+#, elixir-autogen, elixir-format
+msgid "Could not save the note."
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:884
+#, elixir-autogen, elixir-format
+msgid "Delete"
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/index_live.ex:92
+#, elixir-autogen, elixir-format
+msgid "Delete board"
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/index_live.ex:90
+#, elixir-autogen, elixir-format
+msgid "Delete this board?"
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:881
+#, elixir-autogen, elixir-format
+msgid "Delete this board? Its files move to the media trash."
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:533
+#, elixir-autogen, elixir-format
+msgid "Dismiss"
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:896
+#, elixir-autogen, elixir-format
+msgid "Everyone here"
+msgstr ""
+
+#: lib/phoenix_kit_boards/quick.ex:250
+#: lib/phoenix_kit_boards/quick.ex:255
+#: lib/phoenix_kit_boards/web/boards_panel.ex:658
+#, elixir-autogen, elixir-format
+msgid "Image"
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:586
+#, elixir-autogen, elixir-format
+msgid "Jot a note…"
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:856
+#, elixir-autogen, elixir-format
+msgid "Make private"
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/index_live.ex:67
+#, elixir-autogen, elixir-format
+msgid "New board"
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:617
+#, elixir-autogen, elixir-format
+msgid "New empty board"
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:546
+#, elixir-autogen, elixir-format
+msgid "No boards here yet."
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/index_live.ex:76
+#, elixir-autogen, elixir-format
+msgid "No boards yet. Create your first one."
+msgstr ""
+
+#: lib/phoenix_kit_boards/quick.ex:243
+#, elixir-autogen, elixir-format
+msgid "Note"
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:900
+#, elixir-autogen, elixir-format
+msgid "One image at a time."
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:899
+#, elixir-autogen, elixir-format
+msgid "Only images can be added here."
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:895
+#, elixir-autogen, elixir-format
+msgid "Only me"
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:472
+#, elixir-autogen, elixir-format
+msgid "Only the board's creator can do that."
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/index_live.ex:101
+#, elixir-autogen, elixir-format
+msgid "Open"
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:836
+#, elixir-autogen, elixir-format
+msgid "Pin to front"
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:825
+#, elixir-autogen, elixir-format
+msgid "Rename"
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:599
+#, elixir-autogen, elixir-format
+msgid "Save"
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:772
+#, elixir-autogen, elixir-format
+msgid "Save name"
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:867
+#, elixir-autogen, elixir-format
+msgid "Share with everyone here"
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:566
+#, elixir-autogen, elixir-format
+msgid "Show all %{count}"
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:506
+#, elixir-autogen, elixir-format
+msgid "Sign in to see boards here."
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:635
+#: lib/phoenix_kit_boards/web/boards_panel.ex:636
+#, elixir-autogen, elixir-format
+msgid "Start with a note"
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:650
+#: lib/phoenix_kit_boards/web/boards_panel.ex:651
+#, elixir-autogen, elixir-format
+msgid "Start with an image"
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:640
+#, elixir-autogen, elixir-format
+msgid "Text"
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:474
+#, elixir-autogen, elixir-format
+msgid "That board is no longer available."
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:466
+#, elixir-autogen, elixir-format
+msgid "That did not work."
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:898
+#, elixir-autogen, elixir-format
+msgid "That file is too large."
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:374
+#, elixir-autogen, elixir-format
+msgid "That is not available here."
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:359
+#, elixir-autogen, elixir-format
+msgid "That name will not do."
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:901
+#, elixir-autogen, elixir-format
+msgid "That upload failed."
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:845
+#, elixir-autogen, elixir-format
+msgid "Unpin"
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/index_live.ex:22
+#, elixir-autogen, elixir-format
+msgid "Untitled board"
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/index_live.ex:98
+#, elixir-autogen, elixir-format
+msgid "Updated %{time}"
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:672
+#, elixir-autogen, elixir-format
+msgid "Who can see the board"
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:310
+#, elixir-autogen, elixir-format
+msgid "Write something first."
+msgstr ""
+
+#: lib/phoenix_kit_boards/web/boards_panel.ex:434
+#, elixir-autogen, elixir-format
+msgid "You cannot add boards here."
+msgstr ""

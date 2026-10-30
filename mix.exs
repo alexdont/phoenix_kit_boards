@@ -82,6 +82,11 @@ defmodule PhoenixKitBoards.MixProject do
       pk_dep(:phoenix_kit, ">= 2.64.1 and < 4.0.0"),
       {:phoenix_live_view, "~> 1.1"},
 
+      # The module's own translations (`PhoenixKitBoards.Gettext`, catalogs in
+      # `priv/gettext`). Core brings it too; declared here because this package
+      # compiles a backend of its own and should not lean on a transitive dep.
+      {:gettext, "~> 1.0"},
+
       # The infinite-canvas engine + annotation layer. The host already loads
       # their JS + hooks (the media annotation feature), so these constraints
       # exist to agree with PhoenixKit core rather than to pull anything new.

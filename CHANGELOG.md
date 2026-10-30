@@ -54,6 +54,13 @@ their files in a media folder of their own, and be made from a drop-in widget.
 - **Migration V2** (additive; every column nullable or defaulted): `scope_type`,
   `scope_id`, `visibility`, `kind`, `folder_uuid`, `folder_parent_uuid`,
   `preview`, `pinned_at`, `archived_at`. Hosts run `mix phoenix_kit.update`.
+- **Russian and Estonian.** Every string in the widget, the boards list and the
+  board page, and the sidebar tab, is translated (`PhoenixKitBoards.Gettext`,
+  catalogs in `priv/gettext`, English as the source). The language is the one core
+  puts on the request, so a widget on a host page follows the host's language. A
+  completeness test fails if a string is added without both translations, or a
+  translation drops a `%{placeholder}`. A quick board's default name is now
+  numeric-dated (`Доска · 2026-10-30 12:00`) so it never carries an English month.
 - **Database tests** — a `DataCase`, a bare endpoint for `Phoenix.LiveViewTest`
   and integration tests for all of the above (the module had none).
 

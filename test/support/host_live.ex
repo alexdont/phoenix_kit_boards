@@ -10,6 +10,9 @@ defmodule PhoenixKitBoards.Test.HostLive do
 
   @impl true
   def mount(_params, session, socket) do
+    # What core's on_mount does for the process: the locale of the request.
+    if locale = session["locale"], do: Gettext.put_locale(locale)
+
     user =
       case session["user_uuid"] do
         nil -> nil

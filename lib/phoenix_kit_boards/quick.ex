@@ -12,6 +12,8 @@ defmodule PhoenixKitBoards.Quick do
   screen) — a note at editor-default size would be a speck.
   """
 
+  use Gettext, backend: PhoenixKitBoards.Gettext
+
   require Logger
 
   alias PhoenixKit.Modules.Storage
@@ -42,7 +44,7 @@ defmodule PhoenixKitBoards.Quick do
   @spec create_empty(Boards.scope(), String.t(), keyword()) ::
           {:ok, PhoenixKitBoards.Board.t()} | {:error, term()}
   def create_empty(scope, user_uuid, opts \\ []),
-    do: create(scope, user_uuid, dated("Board"), opts)
+    do: create(scope, user_uuid, dated(gettext("Board")), opts)
 
   @doc """
   Makes a board holding `text`. `{:error, :empty}` for a note with nothing in it.
@@ -238,19 +240,19 @@ defmodule PhoenixKitBoards.Quick do
 
   defp note_name(text) do
     case text |> String.split(~r/\R/, trim: true) |> List.first() |> clip() do
-      "" -> dated("Note")
+      "" -> dated(gettext("Note"))
       name -> name
     end
   end
 
   defp image_name(%{client_name: name}) when is_binary(name) do
     case name |> Path.basename() |> Path.rootname() |> clip() do
-      "" -> dated("Image")
+      "" -> dated(gettext("Image"))
       clean -> clean
     end
   end
 
-  defp image_name(_), do: dated("Image")
+  defp image_name(_), do: dated(gettext("Image"))
 
   defp clip(nil), do: ""
 
@@ -262,5 +264,7 @@ defmodule PhoenixKitBoards.Quick do
       else: text
   end
 
-  defp dated(what), do: "#{what} · #{Calendar.strftime(DateTime.utc_now(), "%b %-d, %H:%M")}"
+  # The date is numeric, so it reads the same in every language: "%b" would be an
+  # English month in a Russian or Estonian board's name.
+  defp dated(what), do: "#{what} · #{Calendar.strftime(DateTime.utc_now(), "%Y-%m-%d %H:%M")}"
 end

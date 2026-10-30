@@ -4,6 +4,7 @@ defmodule PhoenixKitBoards.Web.IndexLive do
   PhoenixKit applies the admin layout automatically.
   """
   use PhoenixKitWeb, :live_view
+  use Gettext, backend: PhoenixKitBoards.Gettext
 
   alias PhoenixKitBoards.{Boards, Paths}
 
@@ -11,20 +12,23 @@ defmodule PhoenixKitBoards.Web.IndexLive do
   def mount(_params, _session, socket) do
     {:ok,
      socket
-     |> assign(:page_title, "Boards")
+     |> assign(:page_title, gettext("Boards"))
      |> load_boards()}
   end
 
   @impl true
   def handle_event("create", _params, socket) do
     attrs = %{
-      "name" => "Untitled board",
+      "name" => gettext("Untitled board"),
       "created_by" => current_user_uuid(socket)
     }
 
     case Boards.create_board(attrs) do
-      {:ok, board} -> {:noreply, push_navigate(socket, to: Paths.board(board.uuid))}
-      {:error, _cs} -> {:noreply, put_flash(socket, :error, "Could not create the board.")}
+      {:ok, board} ->
+        {:noreply, push_navigate(socket, to: Paths.board(board.uuid))}
+
+      {:error, _cs} ->
+        {:noreply, put_flash(socket, :error, gettext("Could not create the board."))}
     end
   end
 
@@ -40,7 +44,7 @@ defmodule PhoenixKitBoards.Web.IndexLive do
             {:noreply, load_boards(socket)}
 
           {:error, _changeset} ->
-            {:noreply, put_flash(socket, :error, "Could not delete the board.")}
+            {:noreply, put_flash(socket, :error, gettext("Could not delete the board."))}
         end
     end
   end
@@ -60,10 +64,10 @@ defmodule PhoenixKitBoards.Web.IndexLive do
     <div class="mx-auto max-w-5xl px-4 py-6 space-y-6">
       <div class="flex items-center justify-between gap-4">
         <p class="text-sm text-base-content/60">
-          Collaborative infinite canvases — open one in two tabs to see live sync.
+          {gettext("Collaborative infinite canvases — open one in two tabs to see live sync.")}
         </p>
         <button type="button" phx-click="create" class="btn btn-primary btn-sm">
-          <.icon name="hero-plus" class="w-4 h-4" /> New board
+          <.icon name="hero-plus" class="w-4 h-4" /> {gettext("New board")}
         </button>
       </div>
 
@@ -72,7 +76,7 @@ defmodule PhoenixKitBoards.Web.IndexLive do
         class="rounded-lg border border-dashed border-base-300 p-10 text-center"
       >
         <.icon name="hero-rectangle-group" class="w-8 h-8 mx-auto text-base-content/40" />
-        <p class="mt-2 text-base-content/60">No boards yet. Create your first one.</p>
+        <p class="mt-2 text-base-content/60">{gettext("No boards yet. Create your first one.")}</p>
       </div>
 
       <ul :if={@boards != []} class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -86,18 +90,18 @@ defmodule PhoenixKitBoards.Web.IndexLive do
                 type="button"
                 phx-click="delete"
                 phx-value-id={board.uuid}
-                data-confirm="Delete this board?"
+                data-confirm={gettext("Delete this board?")}
                 class="btn btn-ghost btn-xs btn-circle text-error"
-                aria-label="Delete board"
+                aria-label={gettext("Delete board")}
               >
                 <.icon name="hero-trash" class="w-4 h-4" />
               </button>
             </div>
             <p class="text-xs text-base-content/50">
-              Updated {Calendar.strftime(board.updated_at, "%Y-%m-%d %H:%M")}
+              {gettext("Updated %{time}", time: Calendar.strftime(board.updated_at, "%Y-%m-%d %H:%M"))}
             </p>
             <.link navigate={Paths.board(board.uuid)} class="btn btn-sm btn-outline w-full">
-              Open
+              {gettext("Open")}
             </.link>
           </div>
         </li>

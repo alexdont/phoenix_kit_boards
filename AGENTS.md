@@ -302,6 +302,19 @@ add the `apply_step/3` clauses, and teach `infer_version/2` the new shape.
   clause therefore omits `#board-root` entirely, letting the connected render
   insert it fresh.
 
+## Translations
+
+Every user-facing string goes through `gettext/1` from `PhoenixKitBoards.Gettext`
+(`use Gettext, backend: PhoenixKitBoards.Gettext` after `use PhoenixKitWeb`) — a
+literal, never a variable, so extraction can see it. Tab labels use
+`dgettext_noop("default", "…")` plus `gettext_backend:` on the `Tab`, and core
+translates them. After adding or changing a string: `mix gettext.extract --merge`,
+then translate it in `priv/gettext/ru` and `priv/gettext/et`. `test/gettext_test.exs`
+fails on a string in the code that is not in the catalog (or the reverse), an
+untranslated or fuzzy entry, and a translation that changes a `%{placeholder}`.
+Names written to the database (a quick board's default name) are translated when
+they are made, in the creator's language, and carry a numeric date.
+
 ## Testing
 
 Two levels. **Unit** tests need no database. **Integration** tests
