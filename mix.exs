@@ -138,8 +138,12 @@ defmodule PhoenixKitBoards.MixProject do
       # `nav_buttons: [:modes]`, the View | Annotate switch. On older ones the
       # host's compile warns about the attributes and the export comes out
       # without the drawing.
+      #
+      # etcher 0.26 is the floor now: `:measure` (the laser meter tool the
+      # board offers when the host turns `laser_measure` on) arrived there,
+      # and an older etcher drops the unknown tool from the bar without a word.
       pk_dep(:fresco, ">= 0.16.0 and < 1.0.0"),
-      pk_dep(:etcher, "~> 0.25"),
+      pk_dep(:etcher, "~> 0.26"),
 
       # Link previews: fetch the page (req), read its OpenGraph tags (floki),
       # draw the card (open_fresco). Cards are emitted as SVG and rasterized
